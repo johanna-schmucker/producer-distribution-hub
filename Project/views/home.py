@@ -1,6 +1,7 @@
 import streamlit as st
 
 from pdh import config, content
+from pdh.graphics import farm_to_plate_html
 from pdh.ui import footer, html, open_join, spacer, top_bar
 
 top_bar()
@@ -15,13 +16,8 @@ with left:
     that want their food. We take the orders, send one invoice, arrange the cold delivery and put a QR code on
     every box.</p>
     """)
-    b1, b2 = st.columns([1.3, 1])
-    with b1:
-        if st.button("Join our first season", type="primary", key="hero_join"):
-            open_join("Farm")
-    with b2:
-        if st.button("Our business model", key="hero_model"):
-            st.switch_page("views/model.py")
+    if st.button("Join our first season", type="primary", key="hero_join"):
+        open_join("Farm")
 with right:
     html("""
     <div class="order"><div class="head"><span>Example weekly order</span><span>1 invoice</span></div>
@@ -32,15 +28,10 @@ with right:
     <div class="foot"><b>One cold delivery</b><span>QR code on every box</span></div></div>
     """)
 
-# ---- what we do in one glance
+# ---- farm to plate graphic
 spacer(64)
-html('<div class="eyebrow">What we do</div><div class="section-title">From the farm to the shelf, with us in the middle</div>')
-flow = [("Small farms", "Grow the food and set the harvest. They pay nothing upfront."),
-        ("Producer Distribution Hub", "We take orders, send one invoice, arrange cold delivery and add the QR code."),
-        ("Grocers and restaurants", "Order from many farms in one place and receive one delivery.")]
-for col, (title, body) in zip(st.columns(3, gap="large"), flow):
-    with col:
-        html(f'<div class="col"><h3>{title}</h3><p>{body}</p></div>')
+html('<div class="eyebrow">Farm to table, made visible</div><div class="section-title">Every plate has a farm behind it. We make it visible.</div>')
+html(farm_to_plate_html())
 
 # ---- the gap
 spacer(72)
