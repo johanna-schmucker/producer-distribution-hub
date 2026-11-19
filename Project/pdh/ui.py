@@ -5,7 +5,7 @@ import streamlit as st
 
 from pdh import config, storage
 
-CHECK = ('<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2.5" '
+CHECK = ('<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" '
          'stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>')
 
 
@@ -53,9 +53,9 @@ NAV = [("views/home.py", "Home"), ("views/farms.py", "For farms"),
 
 def top_bar() -> None:
     """Brand, page tabs and Join button in one row at the top of every page."""
-    brand, *tabs, join = st.columns([2.6, 0.7, 0.9, 2.1, 1.4, 0.9], vertical_alignment="center")
+    brand, *tabs, join = st.columns([3.0, 0.7, 0.9, 2.1, 1.4, 0.9], vertical_alignment="center")
     with brand:
-        html(f'<div class="brand">{config.BRAND}</div>')
+        html(f'<div class="brand"><svg width="34" height="20" viewBox="0 0 34 20" aria-hidden="true"><line x1="5" y1="10" x2="29" y2="10" stroke="#111" stroke-width="2"/><circle cx="5" cy="10" r="4" fill="#111"/><circle cx="17" cy="10" r="6" fill="#2E7D32"/><circle cx="29" cy="10" r="4" fill="#111"/></svg>{config.BRAND}</div>')
     for col, (path, label) in zip(tabs, NAV):
         with col:
             st.page_link(path, label=label)
