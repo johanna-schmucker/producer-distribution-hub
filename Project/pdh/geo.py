@@ -14,29 +14,29 @@ MONTEREGIE_TOWNS = {
 }
 MONTREAL_AREAS = {
     "Plateau-Mont-Royal": (45.523, -73.582), "Rosemont": (45.547, -73.573), "Villeray": (45.545, -73.620),
-    "Outremont": (45.518, -73.612), "Verdun": (45.459, -73.571), "Notre-Dame-de-Grâce": (45.470, -73.620),
+    "Verdun": (45.459, -73.571), "Notre-Dame-de-Grâce": (45.470, -73.620),
     "Sud-Ouest": (45.483, -73.565), "Hochelaga": (45.545, -73.545), "Westmount": (45.487, -73.600),
     "Ahuntsic": (45.560, -73.650),
 }
 
 
-# Verified: Rue Sainte-Catherine is Montréal's primary commercial street (11.2 km, 1,200+ businesses, Tourisme Montréal).
-# It is known for shops and fashion, not groceries. The marker is a point on the downtown section.
-MAIN_STREET = {"Rue Sainte-Catherine (downtown)": (45.5038, -73.5692)}
+# Chemin de la Côte-Sainte-Catherine: 5.5 km, main street of the former village of Outremont.
+# Coordinates (45.5022, -73.6242) from Wikipedia. Not claimed to be a grocery street.
+MAIN_STREET = {"Côte-Sainte-Catherine": (45.5022, -73.6242)}
 
 
 def area_map(points: dict, center: tuple, zoom: float, region_radius: int = 0, selected: str | None = None,
              highlight: tuple = ()) -> None:
     marked = {selected, *highlight}
     df = pd.DataFrame([{"name": n, "lat": lat, "lon": lon} for n, (lat, lon) in points.items()])
-    df["color"] = [[194, 65, 12, 255] if n in marked else [17, 17, 17, 200] for n in df["name"]]
+    df["color"] = [[46, 125, 50, 255] if n in marked else [17, 17, 17, 200] for n in df["name"]]
     base = max(region_radius // 14, 400)
     df["size"] = [int(base * 1.6) if n in marked else base for n in df["name"]]
     layers = []
     if region_radius:
         region = pd.DataFrame([{"lat": center[0], "lon": center[1]}])
         layers.append(pdk.Layer("ScatterplotLayer", region, get_position="[lon, lat]", get_radius=region_radius,
-                                get_fill_color=[194, 65, 12, 25], get_line_color=[194, 65, 12, 180], stroked=True,
+                                get_fill_color=[46, 125, 50, 25], get_line_color=[46, 125, 50, 180], stroked=True,
                                 line_width_min_pixels=2))
     layers += [
         pdk.Layer("ScatterplotLayer", df, get_position="[lon, lat]", get_radius="size", get_fill_color="color",
@@ -54,7 +54,7 @@ def circle_map(center: tuple, zoom: float, radius: int) -> None:
     """Just the launch area as a shaded circle: no towns, no labels."""
     region = pd.DataFrame([{"lat": center[0], "lon": center[1]}])
     layer = pdk.Layer("ScatterplotLayer", region, get_position="[lon, lat]", get_radius=radius,
-                      get_fill_color=[194, 65, 12, 40], get_line_color=[194, 65, 12, 220], stroked=True,
+                      get_fill_color=[46, 125, 50, 40], get_line_color=[46, 125, 50, 220], stroked=True,
                       line_width_min_pixels=2)
     deck = pdk.Deck(map_style="light", layers=[layer],
                     initial_view_state=pdk.ViewState(latitude=center[0], longitude=center[1], zoom=zoom))
