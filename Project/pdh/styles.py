@@ -1,4 +1,4 @@
-"""Plain white editorial look: black text, one tomato accent, hairlines instead of boxes."""
+"""Plain white editorial look: black text, one green accent, hairlines instead of boxes."""
 from __future__ import annotations
 
 import streamlit as st
@@ -6,7 +6,7 @@ import streamlit as st
 CSS = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
-:root { --ink:#111; --muted:#5B5B5B; --line:#E4E4E4; --accent:#C2410C; }
+:root { --ink:#111; --muted:#5B5B5B; --line:#E4E4E4; --accent:#2E7D32; }
 .stApp, header[data-testid="stHeader"] { background:#fff; color:var(--ink); font-family:'Inter',system-ui,sans-serif; }
 footer, [data-testid="stDecoration"] { display:none !important; }
 .block-container { max-width:1080px; padding-top:4.5rem; padding-bottom:4rem; }
@@ -19,11 +19,12 @@ h1,h2,h3 { font-family:'Source Serif 4',Georgia,serif !important; font-weight:60
 [data-testid^="stBaseButton-secondary"]:hover { border-color:var(--accent); color:var(--accent); background:#fff; }
 
 [data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"], [data-testid="stSidebarNav"] { display:none !important; }
-a[data-testid="stPageLink-NavLink"] { background:transparent !important; padding:6px 0; border-radius:0; border-bottom:2px solid transparent; color:var(--ink); }
-a[data-testid="stPageLink-NavLink"] p { font-weight:500; font-size:15px; white-space:nowrap; }
-a[data-testid="stPageLink-NavLink"][aria-current="page"] { border-bottom-color:var(--accent); }
+a[data-testid="stPageLink-NavLink"] { background:transparent !important; padding:6px 0; border-radius:0; border-bottom:2px solid transparent; color:#111 !important; }
+a[data-testid="stPageLink-NavLink"] p { color:#111 !important; font-weight:500; font-size:15px; white-space:nowrap; }
+a[data-testid="stPageLink-NavLink"][aria-current="page"] { border-bottom-color:#111; }
+a[data-testid="stPageLink-NavLink"]:hover { border-bottom-color:#111; }
 a[data-testid="stPageLink-NavLink"][aria-current="page"] p { font-weight:600; }
-.brand { white-space:nowrap; font-family:'Source Serif 4',Georgia,serif; font-weight:600; font-size:20px; min-height:44px; display:flex; align-items:center; }
+.brand { gap:10px; white-space:nowrap; font-family:'Source Serif 4',Georgia,serif; font-weight:600; font-size:20px; min-height:44px; display:flex; align-items:center; }
 .eyebrow { font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
 .hero-title, .page-title { font-family:'Source Serif 4',Georgia,serif; font-weight:600; letter-spacing:-0.02em; line-height:1.06; margin:12px 0 18px; }
 .hero-title { font-size:clamp(40px,5.4vw,64px); }
@@ -36,6 +37,16 @@ a[data-testid="stPageLink-NavLink"][aria-current="page"] p { font-weight:600; }
 .small { font-size:14px; color:var(--muted); margin:10px 0 0; }
 .rule { border-top:1px solid var(--line); }
 
+.f2p { display:grid; grid-template-columns:repeat(4,1fr); gap:56px; }
+.f2p-step { position:relative; }
+.f2p .tile { height:140px; border:1.5px solid #111; border-radius:18px; background:#fff; display:flex; align-items:center; justify-content:center; }
+.f2p .tile.us { border:3px solid var(--accent); background:#F2F8F2; }
+.f2p .icon { width:118px; height:118px; }
+.f2p h3 { font-size:21px; margin:14px 0 6px; }
+.f2p p { color:var(--muted); margin:0; line-height:1.55; font-size:15px; }
+.f2p .gap-arrow { position:absolute; right:-50px; top:64px; width:44px; }
+.f2p .dash { width:44px; height:10px; display:block; }
+@media (max-width:820px) { .f2p { grid-template-columns:1fr 1fr; gap:28px; } .f2p .gap-arrow { display:none; } }
 .strip { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--ink); margin-top:8px; }
 .strip > div { padding:18px 20px 0 0; }
 .strip .n { font-family:'Source Serif 4',Georgia,serif; font-weight:600; font-size:clamp(28px,3vw,38px); line-height:1; }
