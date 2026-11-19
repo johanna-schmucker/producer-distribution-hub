@@ -44,26 +44,6 @@ for col, (n, title, body) in zip(st.columns(3, gap="large"), content.BENEFITS):
     with col:
         html(f'<div class="col"><div class="n">{n}</div><h3>{title}</h3><p>{body}</p></div>')
 
-# ---- Erna
-spacer(72)
-t_left, t_right = st.columns([1.1, 1], gap="large", vertical_alignment="center")
-with t_left:
-    html("""
-    <div class="eyebrow">Traceability</div>
-    <div class="section-title">Scan the box. Meet Erna.</div>
-    <p class="lead">Every box carries a QR code. Guests and shoppers scan it and see who raised their food, and how.
-    This is how that page could look for Erna the cow.</p>
-    """)
-with t_right:
-    html("""
-    <div class="facts"><div class="row"><span>Meet</span><b>Erna</b></div>
-    <div class="row"><span>Farm</span><b>[FARM NAME], Montérégie</b></div>
-    <div class="row"><span>Raised by</span><b>[FARMER NAME]</b></div>
-    <div class="row"><span>Feed</span><b>[FEED TYPE]</b></div>
-    <div class="row"><span>Processed on</span><b>[DATE]</b></div>
-    <div class="row"><span>Delivered by us</span><b>[DATE]</b></div></div>
-    """)
-
 # ---- closing call to action
 spacer(72)
 with st.container(key="cta"):
