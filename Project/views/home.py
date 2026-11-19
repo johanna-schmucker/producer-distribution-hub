@@ -1,0 +1,86 @@
+import streamlit as st
+
+from pdh import config, content
+from pdh.ui import footer, html, open_join, spacer, top_bar
+
+top_bar()
+
+# ---- hero
+left, right = st.columns([1.15, 1], gap="large", vertical_alignment="center")
+with left:
+    html(f"""
+    <div class="eyebrow">{config.TAGLINE}</div>
+    <div class="hero-title">Local food, with a farmer's name on the box.</div>
+    <p class="lead">We are the middleman between small Montérégie farms and the specialty grocers and restaurants
+    that want their food. We take the orders, send one invoice, arrange the cold delivery and put a QR code on
+    every box.</p>
+    """)
+    b1, b2 = st.columns([1.3, 1])
+    with b1:
+        if st.button("Join our first season", type="primary", key="hero_join"):
+            open_join("Farm")
+    with b2:
+        if st.button("Our business model", key="hero_model"):
+            st.switch_page("views/model.py")
+with right:
+    html("""
+    <div class="order"><div class="head"><span>Example weekly order</span><span>1 invoice</span></div>
+    <div class="line"><div><b>Carrots</b><span class="f">Farm A</span></div><div>20 kg</div></div>
+    <div class="line"><div><b>Heirloom tomatoes</b><span class="f">Farm B</span></div><div>12 kg</div></div>
+    <div class="line"><div><b>Salad mix</b><span class="f">Farm C</span></div><div>6 kg</div></div>
+    <div class="line"><div><b>Beets</b><span class="f">Farm D</span></div><div>15 kg</div></div>
+    <div class="foot"><b>One cold delivery</b><span>QR code on every box</span></div></div>
+    """)
+
+# ---- what we do in one glance
+spacer(64)
+html('<div class="eyebrow">What we do</div><div class="section-title">From the farm to the shelf, with us in the middle</div>')
+flow = [("Small farms", "Grow the food and set the harvest. They pay nothing upfront."),
+        ("Producer Distribution Hub", "We take orders, send one invoice, arrange cold delivery and add the QR code."),
+        ("Grocers and restaurants", "Order from many farms in one place and receive one delivery.")]
+for col, (title, body) in zip(st.columns(3, gap="large"), flow):
+    with col:
+        html(f'<div class="col"><h3>{title}</h3><p>{body}</p></div>')
+
+# ---- the gap
+spacer(72)
+html(f'<div class="eyebrow">The gap</div><div class="section-title">Close the gap.</div><p class="prose">{content.GAP_SHORT}</p>')
+
+# ---- what we do
+spacer(56)
+html('<div class="eyebrow">Why buyers like it</div>')
+for col, (n, title, body) in zip(st.columns(3, gap="large"), content.BENEFITS):
+    with col:
+        html(f'<div class="col"><div class="n">{n}</div><h3>{title}</h3><p>{body}</p></div>')
+
+# ---- Erna
+spacer(72)
+t_left, t_right = st.columns([1.1, 1], gap="large", vertical_alignment="center")
+with t_left:
+    html("""
+    <div class="eyebrow">Traceability</div>
+    <div class="section-title">Scan the box. Meet Erna.</div>
+    <p class="lead">Every box carries a QR code. Guests and shoppers scan it and see who raised their food, and how.
+    This is how that page could look for Erna the cow.</p>
+    """)
+with t_right:
+    html("""
+    <div class="facts"><div class="row"><span>Meet</span><b>Erna</b></div>
+    <div class="row"><span>Farm</span><b>[FARM NAME], Montérégie</b></div>
+    <div class="row"><span>Raised by</span><b>[FARMER NAME]</b></div>
+    <div class="row"><span>Feed</span><b>[FEED TYPE]</b></div>
+    <div class="row"><span>Processed on</span><b>[DATE]</b></div>
+    <div class="row"><span>Delivered by us</span><b>[DATE]</b></div></div>
+    """)
+
+# ---- closing call to action
+spacer(72)
+with st.container(key="cta"):
+    html("""
+    <div class="cta-title">Know what you eat. Be conscious.</div>
+    <p class="cta-text">We are starting with a small trial and looking for five grocers, five farms and a cold-chain
+    partner. If that is you, join us.</p>
+    """)
+    if st.button("Join our first season", type="primary", key="cta_join"):
+        open_join("Farm")
+footer()
