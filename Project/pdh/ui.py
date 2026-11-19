@@ -47,21 +47,24 @@ def open_join(role: str) -> None:
     join_dialog()
 
 
+LOGO = '<svg width="34" height="20" viewBox="0 0 34 20" aria-hidden="true"><line x1="5" y1="10" x2="29" y2="10" stroke="#111" stroke-width="2"/><circle cx="5" cy="10" r="4" fill="#111"/><circle cx="17" cy="10" r="6" fill="#2E7D32"/><circle cx="29" cy="10" r="4" fill="#111"/></svg>'
+
 NAV = [("views/home.py", "Home"), ("views/farms.py", "For farms"),
        ("views/buyers.py", "For grocers and restaurants"), ("views/model.py", "Business model")]
 
 
 def top_bar() -> None:
-    """Brand, page tabs and Join button in one row at the top of every page."""
-    brand, *tabs, join = st.columns([3.0, 0.7, 0.9, 2.1, 1.4, 0.9], vertical_alignment="center")
-    with brand:
-        html(f'<div class="brand"><svg width="34" height="20" viewBox="0 0 34 20" aria-hidden="true"><line x1="5" y1="10" x2="29" y2="10" stroke="#111" stroke-width="2"/><circle cx="5" cy="10" r="4" fill="#111"/><circle cx="17" cy="10" r="6" fill="#2E7D32"/><circle cx="29" cy="10" r="4" fill="#111"/></svg>{config.BRAND}</div>')
-    for col, (path, label) in zip(tabs, NAV):
-        with col:
-            st.page_link(path, label=label)
-    with join:
-        if st.button("Join", type="primary", key="top_join"):
-            open_join("Farm")
+    """Brand, page tabs and Join button. The row wraps onto a second line when the window gets narrow."""
+    with st.container(key="topbar"):
+        brand, *tabs, join = st.columns(6, vertical_alignment="center")
+        with brand:
+            html('<div class="brand">'+LOGO+f'{config.BRAND}</div>')
+        for col, (path, label) in zip(tabs, NAV):
+            with col:
+                st.page_link(path, label=label)
+        with join:
+            if st.button("Join", type="primary", key="top_join"):
+                open_join("Farm")
     spacer(28)
 
 
