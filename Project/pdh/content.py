@@ -111,3 +111,9 @@ MUST_BE_TRUE = [
     "Grocers will pay a 10 to 20 percent premium for verified local food.",
     "Several small farms can deliver consistent volume and quality every week.",
 ]
+
+
+PRIVACY = ("We use your name and email only to contact you about the first season trial. "
+           "We do not share them, and you can ask us to delete them at any time.")
+FEEDBACK_LABEL = "What would you change about this page? (optional)"
+POLL_PRIVACY = "Your answer is anonymous. We store only a yes or a no."
