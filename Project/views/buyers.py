@@ -1,7 +1,7 @@
 import streamlit as st
 
 from pdh import config, content, storage
-from pdh.geo import MAIN_STREET, MONTREAL_AREAS, area_map
+from pdh.geo import MAIN_STREET, area_map
 from pdh.ui import checklist, footer, html, open_join, spacer, top_bar
 
 top_bar()
@@ -30,12 +30,10 @@ with left:
         "<b>Fresh, seasonal</b> produce from Montérégie.",
     ])
     html('<div class="eyebrow">Where we would deliver first</div>')
-    st.caption("Rue Sainte-Catherine is Montréal's main commercial street: 11.2 km and over 1,200 businesses "
-               "(Tourisme Montréal). It is known for shops more than groceries, so we show it as the city's main "
-               "commercial axis. The neighbourhoods are examples, and we would confirm the first delivery area "
-               "with our first grocer.")
+    st.caption("Chemin de la Côte-Sainte-Catherine is the 5.5 km main street of the former village of Outremont. "
+               "We would confirm the first delivery area with our first grocer.")
 with right:
-    area_map({**MONTREAL_AREAS, **MAIN_STREET}, center=(45.52, -73.60), zoom=10.6, highlight=tuple(MAIN_STREET))
+    area_map(MAIN_STREET, center=(45.5022, -73.6242), zoom=11.5, highlight=tuple(MAIN_STREET))
 
 spacer(48)
 with st.container(key="ask"):
@@ -44,6 +42,7 @@ with st.container(key="ask"):
     <p class="cta-text">You would like to eat, cook or serve more consciously, but the offer is missing where you
     shop or dine. Tell us, and help us decide where to start.</p>
     """)
+    st.caption(content.POLL_PRIVACY)
     if not st.session_state.get("voted"):
         c1, c2, _ = st.columns([1.2, 1, 2])
         with c1:
