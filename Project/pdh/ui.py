@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from pdh import config, storage
+from pdh import config, content, storage
 
 CHECK = ('<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" '
          'stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>')
@@ -26,19 +26,21 @@ def checklist(items: list[str]) -> None:
 def join_dialog() -> None:
     st.write("We are starting with a small trial of two or three farms and one grocer. "
              "Leave your details and we will get back to you.")
+    st.caption(content.PRIVACY)
     default_role = st.session_state.get("role_default", "Farm")
     with st.form("signup"):
         name = st.text_input("Your name")
         email = st.text_input("Email")
         role = st.selectbox("I am a", config.ROLES,
                             index=config.ROLES.index(default_role) if default_role in config.ROLES else 0)
-        note = st.text_area("Anything we should know? (optional)", height=90)
+        feedback = st.text_area(content.FEEDBACK_LABEL, height=90)
+        note = st.text_area("Anything else we should know? (optional)", height=70)
         submitted = st.form_submit_button("Send", type="primary")
     if submitted:
         if not name.strip() or not storage.valid_email(email):
             st.error("Please enter your name and a valid email address.")
         else:
-            storage.save_signup(name.strip(), email.strip(), role, note.strip())
+            storage.save_signup(name.strip(), email.strip(), role, note.strip(), feedback.strip())
             st.success("Thank you. We will be in touch.")
 
 
