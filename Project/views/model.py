@@ -9,7 +9,7 @@ r = route_numbers(300, 18, 500, 10)
 html("""
 <div class="eyebrow">Business model</div>
 <div class="page-title">One invoice in. Farms paid out. A small share for us.</div>
-<p class="lead">Here is how the money moves, using a typical $300 grocer order as the example.</p>
+<p class="lead">Here is how the money moves, using a typical $300 grocer order as the example. These are our planned terms for the pilot.</p>
 """)
 html(f'''<div class="strip" style="grid-template-columns:repeat(3,1fr)">
 <div><div class="n">$300</div><div class="l">the grocer pays us one invoice</div></div>
