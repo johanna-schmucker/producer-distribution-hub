@@ -13,7 +13,7 @@ with left:
     """)
     checklist([
         "<b>No upfront fee.</b> We only earn a commission when you sell.",
-        "<b>Paid within 14 days</b> of delivery.",
+        "<b>Paid within 14 days</b> of delivery. This is our plan for the pilot.",
         "<b>Your farm and your story</b> reach buyers who care about them.",
         "<b>We handle</b> pooling, delivery, invoicing and customer contact.",
     ])
