@@ -12,12 +12,6 @@ MONTEREGIE_TOWNS = {
     "Sorel-Tracy": (46.040, -73.113), "Cowansville": (45.201, -72.746), "Chambly": (45.450, -73.287),
     "Beloeil": (45.567, -73.200), "Saint-Rémi": (45.267, -73.617), "Farnham": (45.284, -72.985),
 }
-MONTREAL_AREAS = {
-    "Plateau-Mont-Royal": (45.523, -73.582), "Rosemont": (45.547, -73.573), "Villeray": (45.545, -73.620),
-    "Verdun": (45.459, -73.571), "Notre-Dame-de-Grâce": (45.470, -73.620),
-    "Sud-Ouest": (45.483, -73.565), "Hochelaga": (45.545, -73.545), "Westmount": (45.487, -73.600),
-    "Ahuntsic": (45.560, -73.650),
-}
 
 
 # Chemin de la Côte-Sainte-Catherine: 5.5 km, main street of the former village of Outremont.
@@ -42,7 +36,7 @@ def area_map(points: dict, center: tuple, zoom: float, region_radius: int = 0, s
         pdk.Layer("ScatterplotLayer", df, get_position="[lon, lat]", get_radius="size", get_fill_color="color",
                   radius_min_pixels=5, pickable=True),
         pdk.Layer("TextLayer", df, get_position="[lon, lat]", get_text="name", get_size=13, get_color=[17, 17, 17, 255],
-                  get_pixel_offset=[0, -16], get_alignment_baseline="'bottom'", font_weight=600, outline_width=3,
+                  get_pixel_offset=[0, -16], get_alignment_baseline="'bottom'", font_weight=600, font_family="Arial, sans-serif", character_set="auto", outline_width=3,
                   outline_color=[255, 255, 255, 255], font_settings={"sdf": True}),
     ]
     deck = pdk.Deck(map_style="light", layers=layers, tooltip={"text": "{name}"},
